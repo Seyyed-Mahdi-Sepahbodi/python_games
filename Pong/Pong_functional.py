@@ -1,5 +1,5 @@
-import turtle
 import os
+import turtle
 
 window = turtle.Screen()
 window.title("Pong by Seyyed Mahdi Sepahbodi")
@@ -47,10 +47,11 @@ pen.color("white")
 pen.penup()
 pen.hideturtle()
 pen.goto(0, 260)
-pen.write("Player A: 0  Player B: 0", align="center", font=("Courier", 24, "normal"))
+pen.write("Player A: 0  Player B: 0", align="center",
+          font=("Courier", 24, "normal"))
 
 
-# Functions 
+# Functions
 
 # paddle a moving up function
 def paddle_a_up():
@@ -59,22 +60,29 @@ def paddle_a_up():
     paddle_a.sety(y)
 
 # paddle a moving down function
+
+
 def paddle_a_down():
     y = paddle_a.ycor()
     y -= 20
     paddle_a.sety(y)
 
 # paddle b moving up function
+
+
 def paddle_b_up():
     y = paddle_b.ycor()
     y += 20
     paddle_b.sety(y)
 
 # paddle b moving down function
+
+
 def paddle_b_down():
     y = paddle_b.ycor()
     y -= 20
     paddle_b.sety(y)
+
 
 # keyboard binding
 window.listen()
@@ -86,7 +94,6 @@ window.onkeypress(paddle_b_down, "Down")
 # main game loop
 while True:
     window.update()
-    # print(sound_file)
 
     # Move the ball
     ball.setx(ball.xcor() + ball.dx)
@@ -107,13 +114,15 @@ while True:
         ball.dx *= -1
         score_a += 1
         pen.clear()
-        pen.write("Player A: {}  Player B: {}".format(score_a, score_b), align="center", font=("Courier", 24, "normal"))
+        pen.write("Player A: {}  Player B: {}".format(score_a, score_b),
+                  align="center", font=("Courier", 24, "normal"))
     elif ball.xcor() < -390:
         ball.goto(0, 0)
         ball.dx *= -1
         score_b += 1
         pen.clear()
-        pen.write("Player A: {}  Player B: {}".format(score_a, score_b), align="center", font=("Courier", 24, "normal"))
+        pen.write("Player A: {}  Player B: {}".format(score_a, score_b),
+                  align="center", font=("Courier", 24, "normal"))
 
     # Paddle and ball collisions
     if (ball.xcor() < -340 and ball.xcor() > -350) and (ball.ycor() < paddle_a.ycor() + 40 and ball.ycor() > paddle_a.ycor() - 40):
