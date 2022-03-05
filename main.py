@@ -32,6 +32,38 @@ ball.color("white")
 ball.penup()
 ball.goto(0, 0)
 
+# Functions 
+
+# paddle a moving up function
+def paddle_a_up():
+    y = paddle_a.ycor()
+    y += 20
+    paddle_a.sety(y)
+
+# paddle a moving down function
+def paddle_a_down():
+    y = paddle_a.ycor()
+    y -= 20
+    paddle_a.sety(y)
+
+# paddle b moving up function
+def paddle_b_up():
+    y = paddle_b.ycor()
+    y += 20
+    paddle_b.sety(y)
+
+# paddle b moving down function
+def paddle_b_down():
+    y = paddle_b.ycor()
+    y -= 20
+    paddle_b.sety(y)
+
+# keyboard binding
+window.listen()
+window.onkeypress(paddle_a_up, "w")
+window.onkeypress(paddle_a_down, "s")
+window.onkeypress(paddle_b_up, "Up")
+window.onkeypress(paddle_b_down, "Down")
 
 # main game loop
 while True:
