@@ -1,10 +1,16 @@
 import turtle
+import os
 
 window = turtle.Screen()
 window.title("Pong by Seyyed Mahdi Sepahbodi")
 window.bgcolor("black")
 window.setup(width=800, height=600)
 window.tracer(0)
+
+# Scores
+score_a = 0
+score_b = 0
+
 
 # paddle A
 paddle_a = turtle.Turtle()
@@ -31,8 +37,18 @@ ball.shape("square")
 ball.color("white")
 ball.penup()
 ball.goto(0, 0)
-ball.dx = 0.1
-ball.dy = 0.1
+ball.dx = 0.03
+ball.dy = 0.03
+
+# Pen
+pen = turtle.Turtle()
+pen.speed(0)
+pen.color("white")
+pen.penup()
+pen.hideturtle()
+pen.goto(0, 260)
+pen.write("Player A: 0  Player B: 0", align="center", font=("Courier", 24, "normal"))
+
 
 # Functions 
 
@@ -70,6 +86,7 @@ window.onkeypress(paddle_b_down, "Down")
 # main game loop
 while True:
     window.update()
+    # print(sound_file)
 
     # Move the ball
     ball.setx(ball.xcor() + ball.dx)
@@ -79,21 +96,31 @@ while True:
     if ball.ycor() > 290:
         ball.sety(290)
         ball.dy *= -1
+        os.system('aplay ./Pong/ball_sound.wav&')
     elif ball.ycor() < -290:
         ball.sety(-290)
         ball.dy *= -1
+        os.system('aplay ./Pong/ball_sound.wav&')
 
     if ball.xcor() > 390:
         ball.goto(0, 0)
         ball.dx *= -1
+        score_a += 1
+        pen.clear()
+        pen.write("Player A: {}  Player B: {}".format(score_a, score_b), align="center", font=("Courier", 24, "normal"))
     elif ball.xcor() < -390:
         ball.goto(0, 0)
         ball.dx *= -1
+        score_b += 1
+        pen.clear()
+        pen.write("Player A: {}  Player B: {}".format(score_a, score_b), align="center", font=("Courier", 24, "normal"))
 
     # Paddle and ball collisions
     if (ball.xcor() < -340 and ball.xcor() > -350) and (ball.ycor() < paddle_a.ycor() + 40 and ball.ycor() > paddle_a.ycor() - 40):
         ball.setx(-340)
         ball.dx *= -1
+        os.system('aplay ./Pong/ball_sound.wav&')
     elif (ball.xcor() > 340 and ball.xcor() < 350) and (ball.ycor() < paddle_b.ycor() + 40 and ball.ycor() > paddle_b.ycor() - 40):
         ball.setx(340)
         ball.dx *= -1
+        os.system('aplay ./Pong/ball_sound.wav&')
