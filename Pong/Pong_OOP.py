@@ -98,6 +98,12 @@ class GameLogic:
             self.ball.dx *= -1
             os.system('aplay ./Pong/ball_sound.wav&')
 
+    def check_end_game(self, player1, player2):
+        if player1.score == 5 or player2.score == 5:
+            return True
+        else:
+            return False
+
 
 class StartGame:
 
@@ -119,6 +125,8 @@ class StartGame:
             game.chack_hitting_border()
             game.check_ball_go_out(player1, player2)
             game.check_hitting_paddle(player1, player2)
+            if game.check_end_game(player1, player2):
+                break
 
 
 start = StartGame()
